@@ -23,7 +23,7 @@ class Stock(SQLModel, table=True):
     SKU: str = Field(unique=True, index=True)
     category: str
     unit_of_measurement: str
-    quantity: float = Field(default=0)
+    quantity: int = Field(default=0)
 
 class TransactionStatus(str, Enum):
     Ready = "Ready"
@@ -42,7 +42,7 @@ class Transaction(SQLModel, table=True):
     type: TransactionType
     SKU: str = Field(index=True, foreign_key="stock.SKU")
     category: str
-    quantity: float
+    quantity: int
     schedule_date: Optional[datetime] = None
     status: TransactionStatus = Field(default=TransactionStatus.Draft)
     from_location: str

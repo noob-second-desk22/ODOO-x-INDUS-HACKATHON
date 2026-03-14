@@ -3,8 +3,8 @@ from pprint import pprint
 from datetime import datetime
 from flask import Flask, render_template, session, request, url_for, redirect
 from sqlmodel import select
-
-from models.db import create_db, Users, Stock, Transaction, TransactionType
+from models.db import create_db, Users, Stock, Transaction, TransactionType, TransactionStatus
+from utils.database_utils import update_stock_quantity
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -77,6 +77,7 @@ def signup():
             new_user = Users(email=email, LoginId=loginid, password_hash=password)
             db.add(new_user)
             db.commit()
+            return redirect("login")
 
 
     return render_template("signup.html")
@@ -90,10 +91,38 @@ def stock():
     # print(result_list)
     return render_template("stock.html", stock=result_list)
 
-@app.route("/move_history")
+@app.route("/move_history",  methods=['POST', 'GET'])
 def move_history():
     if "logged_in" not in session:
         return redirect("login")
+
+    if request.method == "POST":
+        # print("button clicked")
+        SKU = request.form.get("SKU")
+        good_type = request.form.get("type")
+        quantity = request.form.get("quantity")
+
+        statement = select(Stock).where(Stock.SKU == SKU)
+        stock_item = db.exec(statement).first()
+        print(stock_item)
+
+        if not stock_item:
+            return "Stock item not found"
+        if good_type == "Receipt":
+            stock_item.quantity += int(quantity)  # increase stock
+        else:
+            stock_item.quantity -= int(quantity)  # decrease stock
+
+        statement = select(Transaction).where(Stock.SKU == SKU)
+        transaction = db.exec(statement).first()
+        transaction.status = TransactionStatus.Completed
+        db.add(transaction)
+        db.commit()
+
+
+        db.add(stock_item)
+        db.commit()
+        db.refresh(stock_item)
 
     results = db.exec(select(Transaction)).all()
     result_list = [result.model_dump() for result in results]
