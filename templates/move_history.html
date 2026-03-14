@@ -46,10 +46,15 @@
                 <td>{{item.status}}</td>
 
                 <td>
-                    {% if item.type == "Delivery" and item.status != "Completed" %}
-                        <button class="complete-btn">Complete</button>
+                    {% if item.status != "Completed" %}
+                       <form action="/move_history" method="POST">
+                            <input type="hidden" name="SKU" value="{{item.SKU}}">
+                            <input type="hidden" name="type" value="{{item.type}}">
+                            <input type="hidden" name="quantity" value="{{item.quantity}}">
+                            <button class="complete-btn" type="submit">Complete</button>
+                        </form>
                     {% else %}
-                        <span class="completed-text">Done</span>
+                        <span class="completed-text">Completed</span>
                     {% endif %}
                 </td>
 
