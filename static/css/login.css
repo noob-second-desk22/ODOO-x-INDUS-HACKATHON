@@ -1,0 +1,92 @@
+/* Reset default browser styling */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Body styling */
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#1f4037,#99f2c8);
+}
+
+/* Login box */
+.form-box{
+    background:white;
+    padding:40px 35px;
+    width:350px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Form group spacing */
+.form-group{
+    margin-bottom:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Label styling */
+.form-group label{
+    font-size:14px;
+    margin-bottom:6px;
+    color:#333;
+    font-weight:600;
+}
+
+/* Input fields */
+.form-group input{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+/* Input focus effect */
+.form-group input:focus{
+    outline:none;
+    border-color:#1f4037;
+    box-shadow:0 0 5px rgba(31,64,55,0.3);
+}
+
+/* Button styling */
+.btn{
+    width:100%;
+    padding:12px;
+    background:#1f4037;
+    border:none;
+    border-radius:5px;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+/* Button hover */
+.btn:hover{
+    background:#145c4b;
+}
+
+/* Links */
+form a{
+    font-size:13px;
+    text-decoration:none;
+    color:#1f4037;
+}
+
+form a:hover{
+    text-decoration:underline;
+}
+
+/* Link alignment */
+form a:first-of-type{
+    margin-right:5px;
+}
