@@ -99,5 +99,9 @@ def move_history():
     result_list = [result.model_dump() for result in results]
     return render_template("move_history.html", trans=result_list)
 
+@app.route("/operate", methods=['POST', 'GET'])
+def operate():
+    return render_template("operation.html")
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8888)
