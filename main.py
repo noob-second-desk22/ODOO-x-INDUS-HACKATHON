@@ -2,10 +2,8 @@ import os
 from pprint import pprint
 from datetime import datetime
 from flask import Flask, render_template, session, request, url_for, redirect
-from sqlalchemy import inspect
 from sqlmodel import select
 from models.db import create_db, Users, Stock, Transaction, TransactionType, TransactionStatus
-from utils.database_utils import update_stock_quantity
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
