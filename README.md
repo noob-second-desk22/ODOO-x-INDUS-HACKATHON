@@ -19,6 +19,6 @@ We used these tools to build the project:
 
 ### How to run it
 1. Make sure you have Python installed.
-2. Install the requirements using `pip install flask sqlmodel pydantic`.
-3. Run the project with `python main.py`.
+2. Install the requirements using `uv pip install -r requirements.txt`. (You can do this in a venv)
+3. Run the project with `uv run main.py`.
 4. Open your browser and go to `http://localhost:8888`.
